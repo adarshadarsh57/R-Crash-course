@@ -66,6 +66,7 @@ diamonds%>%
 ## Use ggplot 
 diamonds%>%
     count(color,cut)%>%
+    #Use geom_tile 
     ggplot(mapping = aes(x=color,y=cut))+
         geom_tile(mapping = aes(fill=n))
 
