@@ -7,7 +7,10 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
 ```
+
+
 
 ## Exploratory Data Analysis (EDA)
 Basically : - Looking at the datasets
@@ -35,15 +38,32 @@ head(mpg)
 smaller <- diamonds %>% 
     filter(carat < 3)
 
-##
+## Create a histogram (not a bar chart) try different bin width
+#  Histograms : 
+
 ggplot(data=smaller, mapping = aes(x=carat))+
     geom_histogram(binwidth = 0.1)
+ggplot(data=smaller, mapping = aes(x=carat))+
+    geom_histogram(binwidth = 0.3)
+ggplot(data=smaller, mapping = aes(x=carat))+
+    geom_histogram(binwidth = 0.8)
+ggplot(data=smaller, mapping = aes(x=carat))+
+    geom_histogram(binwidth = 2.0)
 
-##
+## Make a Boxplot, include reorder
+#  Boxplots: 
 ggplot(data = mpg)+
     geom_boxplot(mapping = aes(x=reorder(class,hwy,FUN = median),y=hwy))
 
-##
+## No need for "dplyr ::" As tidyverse has already called dplyr (while declaring library earlier)
+diamonds%>%
+    count(color,cut)
+
+## See if sort makes it better
+diamonds%>%
+    count(color,cut, sort=T)
+
+## Use ggplot 
 diamonds%>%
     count(color,cut)%>%
     ggplot(mapping = aes(x=color,y=cut))+
