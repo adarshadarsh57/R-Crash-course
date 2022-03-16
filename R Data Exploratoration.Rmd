@@ -1,0 +1,54 @@
+---
+title: "R Exploratory Data Analysis"
+author: "Adarsh"
+date: "March 16, 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exploratory Data Analysis (EDA)
+Basically : - Looking at the datasets
+            - Finding Clues
+            - Looking for abnormalities
+            - Cleaning it
+            - Shapping it
+            - Visualizing it 
+            - Constatly reiterating to arrive at your research questions
+
+```{r}
+# First look at your dataset
+head(diamonds)
+head(mpg)
+```
+
+
+
+```{r}
+## Read this again: 
+#  The variable smaller recieves the value of the output of diamonds... 
+#  being filtered when carat <3
+#  So => the allocation happens only when carat is less than 3
+
+smaller <- diamonds %>% 
+    filter(carat < 3)
+
+##
+ggplot(data=smaller, mapping = aes(x=carat))+
+    geom_histogram(binwidth = 0.1)
+
+##
+ggplot(data = mpg)+
+    geom_boxplot(mapping = aes(x=reorder(class,hwy,FUN = median),y=hwy))
+
+##
+diamonds%>%
+    count(color,cut)%>%
+    ggplot(mapping = aes(x=color,y=cut))+
+        geom_tile(mapping = aes(fill=n))
+
+
+```
+

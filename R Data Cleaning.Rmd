@@ -1,0 +1,59 @@
+---
+title: "R Data Cleaning"
+author: "Adarsh"
+date: "March 15, 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## TIDYVERSE
+: It is an ecosystem of packages, when imported, imports a group of projects.
+  All these packages work together using a 'tidy data format'.
+  (More info on https://doi.org/10.21105/joss.01686 )
+  
+=> "Tidy data is a way of structuring your data to work with the tidyverse,
+    in a way of making consistent and robust analysis"
+
+All the packages use 'consistent syntax', 'similar function design' and all 
+work 'seemlessly together'.
+
+
+## Deplyr
+: One of the main packages in tidyverse.
+  Used for "filtering", "transforming" and "manipulating" the data.
+  
+
+```{r}
+## Importing tidyverse
+library(tidyverse)
+
+## Built in data-set in tidyverse
+mpg
+```
+
+
+## Pipe operator 
+: When you take one action, you take it's output and then pipe that in as the 
+input to another action
+%>%
+```{r}
+## the filter function is going to recieve the entire dataset ('mpg') as the first argument 
+mpg %>% 
+    dplyr::filter(model=='a4')%>%  # return all rows that satisfy the condition : 'a4' here
+    
+    dplyr::arrange(displ,cyl)%>% # sort/ reorder your columns : first by displ then by cyl
+    
+    dplyr::mutate(old <- year<2000,
+                  full <- drv=='f')%>% #add new & PRESERVE OLD : maark everything that is older then 2000
+
+    ##  !!! CAUTION SKIP this if you want to keep the old record
+#   dplyr::transmute() #add new DROP OLD : 
+    
+    dplyr::select(-drv) ## keep or remove columns
+mpg%>%    
+    dplyr::count(model, sort=T) ## Create aggregate stats
+```
+

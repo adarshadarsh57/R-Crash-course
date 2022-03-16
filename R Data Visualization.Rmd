@@ -1,0 +1,66 @@
+---
+title: "Data Visualization"
+author: "Adarsh"
+date: "March 15, 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## ggplot 
+Grammar of graphics package
+: Let's us create data visualization with our datasets
+```{r}
+## library(tidyverse)
+## ?ggplot
+
+## Usage: ggplot(data = NULL, mapping = aes(), ..., environment = parent.frame())
+## ?ggplot
+## "+" is the alternative for the pipe function(%>%) as ggplot was created before pipe opetators
+```
+
+
+```{r}
+# First take a look at data
+mpg
+```
+
+```{r}
+## Create a Blank canvas - ggplot;  
+ggplot(data = mpg)+
+    
+## Make a basic (default) scatter plot on the canvas - geom; aes()- coordinates
+    geom_point(mapping = aes(x= displ, y=hwy)) 
+
+## Make them colorful - Classify based on a variable 
+ggplot(data = mpg)+
+    geom_point(mapping = aes(x=displ, y=hwy, color=manufacturer))
+
+## FACEt WRAPping: Wrapping each class (is a variable) by its own separate graph 
+ggplot(data = mpg)+
+    geom_point(mapping = aes(x=displ, y=hwy))+
+    facet_wrap(~class, nrow = 2)
+
+## FACEt GRID : Add more grids (more variables)
+ggplot(data = mpg)+
+    geom_point(mapping = aes(x=displ, y=hwy))+
+    facet_grid(drv ~ cyl)
+
+## geom_Smooth : smoothing with margin of error
+ggplot(data = mpg)+
+    geom_point(mapping = aes(x= displ, y=hwy))+ 
+    geom_smooth(mapping = aes(x=displ, y=hwy))
+
+## Combine previous applications
+ggplot(data = mpg, mapping = aes(x= displ, y=hwy))+
+    geom_point(mapping = aes(color=class))+ 
+    geom_smooth()
+
+## Make bar diagrams
+ggplot(data = mpg)+
+    geom_bar(mapping = aes(x=manufacturer))
+```
+

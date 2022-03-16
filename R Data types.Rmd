@@ -1,0 +1,178 @@
+---
+title: "R Data types"
+author: "Adarsh"
+date: "March 15, 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Hotkeys & setup details
+<!-- These are HTML spaces -->
+<!-- The things printed here are not shown in the markdown file -->
+```{r}
+# These are R chunks where codes are executed 
+# The comments in this space are shown in the HTML/PDF markdown file  
+# To comment out  <- ctrl + Shift +c
+# "<-" symbol <- Alt + "-" (minus)
+# ``` <- to start and end R chunks
+# Execute one line <- ctrl + Enter
+# Execute whole chunk <- ctrl + Shift + Enter 
+# To clean variable space <- use the "broom icon" (clear objects from workplace)
+```
+
+## Data types
+In R, Variables are not declared as some data type.
+The Variables assigned to R-'Objects' and the data type of R objects become the data type of the variable. Some frequently used R - objects are:
+
+## R Objects
+- Vector
+
+- List
+
+- Matrix
+
+- Array
+
+- Factors
+
+- Data frames
+
+## R Attributes
+
+<!-- ####### -->
+"Enter here"
+- Names
+
+- Dimentions
+
+- Class
+
+- Length
+
+- User defined attributes
+
+## Vectors
+: Everything is a vector (generally). 
+ But all elements must be of same class. You can also be Empty vectors.
+```{r}
+#?vector
+
+## Function (generally 'NOT REQUIRED') vector(mode = "logical", length = 0)
+## Atomic Object Classes
+## Note: Classes are more powerful as we go down the list. See "POWER" Section.
+
+# Character
+v <- 'Name'
+class(v) ##Print the class of the variable
+
+# Numeric
+v <- 20
+class(v)
+
+# Integer
+v <- 20L
+class(v) ## L suffix makes it an integer data type
+
+# Complex
+v <- 2+0i
+class(v) ## Even when magnitude of i is 0 the vector is defined in the complex space
+
+# Logical
+v <- T
+class(v) ## T/F are default logic gates used in R 
+
+
+##___________________ Understanding allocation ______________________
+
+# See POWER of Object class
+# Countable Infinite 
+# 
+
+##___________________ Concatinating/ Combining ______________________
+fruits <- c("apple", "banana", "orange")
+class(fruits)
+
+```
+
+## Lists
+: These are special vectors where elements can be from different classes. 
+```{r}
+#?list
+
+
+# Function used: list(x, ...)
+
+student <- list(c("Adarsh", 29, "Male"),cos, T )
+student
+
+
+```
+
+## Matrices
+: 2-D rectangular data 
+```{r}
+#?matrix
+
+# Function used: matrix(data = NA, nrow = 1, ncol = 1, byrow = FALSE, 
+#                              dimnames = NULL)
+
+my_matrix <- matrix(c('a', 'b', 'c', 'd'), nrow = 2, ncol = 3)
+
+my_matrix ## Shows "R- RECYCLING" - if dimentions are != repeataion behaviour 
+
+```
+
+## Arrays
+: As learned 
+```{r}
+#?array
+
+## Function used:  array(data = NA, dim = length(data), dimnames = NULL)
+array1 <- array(c("green", "Yellow"), dim=c(2,3,4)) ## dim <- rows col #sets
+array1  ##Repeat just like matrix
+```
+
+
+## Factors
+: CAtegorical variables 
+```{r}
+#?factor
+
+## Functions Used: factor(x = character(), levels, labels = levels,
+##                        exclude = NA, ordered = is.ordered(x), nmax = NA) 
+apple_colors <- c("green","Yellow", "GREEN", "Male", "Male", "Female", "green")
+
+# Creating factor function
+factor_apple <- factor(apple_colors)
+
+factor_apple ## They are case sensitive 
+
+## Count the number of unique categories
+nlevels(factor_apple)
+
+```
+
+## Data Frames
+: (Used in python as well using pandas) Can be used both languages
+Note: ALL THE COLUMNS MUST HAVE THE SAME NUMBER OF ROWS
+```{r}
+#?data.frame
+
+## Function used: data.frame(..., row.names = NULL, check.rows = FALSE,
+##                          check.names = TRUE, fix.empty.names = TRUE,
+##                          stringsAsFactors = FALSE)
+BMI <- data.frame(
+    gender= c("Male", "Male", "Female"),
+    height= c(152,166.2,165),
+    weight= c(81,93,78),
+    age=c(21,54,19)
+) 
+
+BMI
+
+```
+
+
